@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Instagram AI Agent</title>
+  <link rel="stylesheet" href="popup.css" />
+</head>
+<body>
+  <div class="app">
+    <!-- Header -->
+    <div class="header">
+      <div class="header-icon">🤖</div>
+      <div>
+        <h1 class="title">AI Follow Agent</h1>
+        <p class="subtitle">Powered by Llama 3.3</p>
+      </div>
+      <div class="status-dot" id="statusDot" title="Backend status"></div>
+    </div>
+
+    <!-- Tabs -->
+    <div class="tabs">
+      <button class="tab active" data-tab="settings">⚙️ Settings</button>
+      <button class="tab" data-tab="history">📋 History</button>
+      <button class="tab" data-tab="about">ℹ️ About</button>
+    </div>
+
+    <!-- Settings Tab -->
+    <div class="tab-content active" id="tab-settings">
+      <div class="section">
+        <label class="toggle-row">
+          <span class="label-text">Extension Enabled</span>
+          <div class="toggle-wrap">
+            <input type="checkbox" id="enabledToggle" />
+            <span class="toggle-slider"></span>
+          </div>
+        </label>
+      </div>
+
+      <div class="section">
+        <label class="field-label" for="backendUrl">Backend URL</label>
+        <input type="text" id="backendUrl" class="text-input" placeholder="http://localhost:3000" />
+        <button class="btn btn-secondary btn-sm" id="testBtn">Test Connection</button>
+        <span class="test-result" id="testResult"></span>
+      </div>
+
+      <div class="section">
+        <h3 class="section-title">Thresholds</h3>
+        <div class="threshold-row">
+          <label>Accept above score:</label>
+          <div class="slider-wrap">
+            <input type="range" id="acceptThreshold" min="50" max="95" value="70" />
+            <span class="slider-val" id="acceptVal">70</span>
+          </div>
+        </div>
+        <div class="threshold-row">
+          <label>Reject below score:</label>
+          <div class="slider-wrap">
+            <input type="range" id="rejectThreshold" min="5" max="50" value="40" />
+            <span class="slider-val" id="rejectVal">40</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="section">
+        <h3 class="section-title">Auto Actions <span class="warning-tag">⚠️ Use carefully</span></h3>
+        <label class="toggle-row">
+          <span class="label-text">Auto Accept (above threshold)</span>
+          <div class="toggle-wrap">
+            <input type="checkbox" id="autoAccept" />
+            <span class="toggle-slider toggle-green"></span>
+          </div>
+        </label>
+        <label class="toggle-row">
+          <span class="label-text">Auto Reject (below threshold)</span>
+          <div class="toggle-wrap">
+            <input type="checkbox" id="autoReject" />
+            <span class="toggle-slider toggle-red"></span>
+          </div>
+        </label>
+      </div>
+
+      <button class="btn btn-primary" id="saveBtn">💾 Save Settings</button>
+      <span class="save-msg" id="saveMsg"></span>
+    </div>
+
+    <!-- History Tab -->
+    <div class="tab-content" id="tab-history">
+      <div class="history-header">
+        <span id="historyCount">0 analyses</span>
+        <button class="btn btn-secondary btn-sm" id="clearHistory">Clear</button>
+      </div>
+      <div class="history-list" id="historyList">
+        <div class="empty-state">No analyses yet.<br/>Visit your Instagram follow requests page.</div>
+      </div>
+    </div>
+
+    <!-- About Tab -->
+    <div class="tab-content" id="tab-about">
+      <div class="about-section">
+        <div class="about-icon">🤖</div>
+        <h2>Instagram AI Agent</h2>
+        <p>Analyzes Instagram follow requests using <strong>Llama 3.3</strong> via Groq API.</p>
+        <div class="about-steps">
+          <div class="step">1. Go to Instagram follow requests</div>
+          <div class="step">2. AI automatically analyzes each account</div>
+          <div class="step">3. See trust scores overlaid on each request</div>
+          <div class="step">4. (Optional) Enable auto accept/reject</div>
+        </div>
+        <a class="link-btn" href="https://www.instagram.com/accounts/activity/?followRequests=1" target="_blank">
+          Open Instagram Follow Requests →
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <script src="popup.js"></script>
+</body>
+</html>
